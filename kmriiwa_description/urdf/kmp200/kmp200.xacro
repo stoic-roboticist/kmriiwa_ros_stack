@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="kmp200">
+    <link name="base_footprint"/>
+
+    <joint name="footprint_to_base_link" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin rpy="0 0 0.0" xyz="0 0 0.033"/>
+    </joint>
+
+
+    <link name="base_link">
+    	<origin rpy="0 0 0" xyz="0 0 0"/>
+        <visual>
+          <geometry>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/KMP200.dae"/>
+          </geometry>
+          <material name="Grey"/>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="1.12 0.63 0.7"/>
+          </geometry>
+        </collision>
+    </link>
+    
+    <joint name="base_link_to_top" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_top_link"/>
+        <origin rpy="0 0 0.0" xyz="0 0 0.6672"/>
+    </joint>
+    
+    <link name="base_top_link"/>
+
+    <joint name="laser_B1_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="laser_B1_link" />
+            <origin xyz="0.464 -0.256 0.1168" rpy="0 0 -0.7854"/>
+    </joint>
+
+    <link name="laser_B1_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="3.1413 0 0"/>
+          <geometry>
+              <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/visual/sick_lms1xx.dae" />
+          </geometry>
+          <material name="DarkGrey"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/collision/sick_lms1xx.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.2"/>
+            <inertia ixx="0.002355" ixy="0.0" ixz="0.0" iyy="0.002355" iyz="0.0" izz="0.0002809"/>
+        </inertial>
+    </link>
+
+    <joint name="laser_B4_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="laser_B4_link" />
+            <origin xyz="-0.464 0.256 0.1168" rpy="0 0 2.3562"/>
+    </joint>
+
+    <link name="laser_B4_link">
+        <visual>
+          <origin xyz="0.0 0 0" rpy="0 3.1413 3.1413"/>
+          <geometry>
+              <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/visual/sick_lms1xx.dae" />
+          </geometry>
+          <material name="DarkGrey"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                  <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/collision/sick_lms1xx.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.2"/>
+            <inertia ixx="0.002355" ixy="0.0" ixz="0.0" iyy="0.002355" iyz="0.0" izz="0.0002809"/>
+        </inertial>
+    </link>
+
+    <link name="front_left_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </collision>
+    </link>
+
+    <link name="front_right_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </collision>
+    </link>
+
+    <link name="back_left_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </collision>
+    </link>
+
+    <link name="back_right_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <geometry>
+            <cylinder length="0.132" radius="0.125" />
+          </geometry>
+        </collision>
+    </link>
+
+    <joint name="front_left_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0.28 0.182 0.092"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="front_right_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_right_wheel_link"/>
+        <origin xyz="0.28 -0.182 0.092"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="back_left_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_left_wheel_link"/>
+        <origin xyz="-0.28 0.182 0.092"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="back_right_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_right_wheel_link"/>
+        <origin xyz="-0.28 -0.182 0.092"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+   </xacro:macro>
+
+</robot>

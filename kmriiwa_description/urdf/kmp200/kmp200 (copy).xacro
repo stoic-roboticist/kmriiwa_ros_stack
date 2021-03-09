@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="kmp200">
+    <link name="base_footprint"/>
+
+    <joint name="bf" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin rpy="0 0 0.0" xyz="0 0 0.0775"/>
+    </joint>
+
+
+    <link name="base_link">
+        <visual>
+          <geometry>
+            <box size="1.08 0.63 0.085"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <material name="Orange"/>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="1.08 0.63 0.085"/>
+          </geometry>
+        </collision>
+        <inertial>
+            <mass value="55.04"/>
+            <inertia ixx="5.383" ixy="0.0" ixz="0.0" iyy="7.170" iyz="0.0" izz="1.854"/>
+          </inertial>
+    </link>
+
+    <joint name="base_bottom_to_middle_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="base_link_middle" />
+            <origin xyz="0 0 0.0665" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_link_middle">
+        <visual>
+          <geometry>
+            <box size="0.84 0.48 0.048"/>
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 0.0"/>
+          <material name="Orange"/>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="0.920 0.51 0.055"/>
+          </geometry>
+        </collision>
+        <inertial>
+            <mass value="18.42"/>
+            <inertia ixx="1.0866" ixy="0.0" ixz="0.0" iyy="1.437" iyz="0.0" izz="0.357"/>
+        </inertial>
+      </link>
+
+    <joint name="base_middle_to_top_joint" type="fixed">
+            <parent link="base_link_middle" />
+            <child link="base_link_top" />
+            <origin xyz="0 0 0.2865" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_link_top">
+        <visual>
+          <!--origin rpy="0 0 0" xyz="0 0 0.0"/-->
+          <geometry>
+            <box size="1.08 0.63 0.525"/>
+            <!--mesh filename="package://kmriiwa_description/meshes/kmp200/kmp200.stl"/-->
+          </geometry>
+          <origin rpy="0 0 0" xyz="0 0 0.0"/>
+          <material name="Grey"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0.0"/>
+          <geometry>
+            <box size="1.08 0.63 0.5335"/>
+            <!--mesh filename="package://kmriiwa_description/meshes/kmp200/kmp200.stl"/-->
+          </geometry>
+        </collision>
+        <inertial>
+            <mass value="339.96"/>
+            <inertia ixx="39.1077" ixy="0.0" ixz="0.0" iyy="42.397" iyz="0.0" izz="18.238"/>
+        </inertial>
+    </link>
+
+
+
+
+    <joint name="laser_B1_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="laser_B1_link" />
+            <origin xyz="0.483 -0.258 0.0765" rpy="0 0 -0.7854"/>
+    </joint>
+
+    <link name="laser_B1_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="3.1413 0 0"/>
+          <geometry>
+              <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/visual/sick_lms1xx.dae" />
+          </geometry>
+          <material name="DarkGrey"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/collision/sick_lms1xx.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.2"/>
+            <inertia ixx="0.002355" ixy="0.0" ixz="0.0" iyy="0.002355" iyz="0.0" izz="0.0002809"/>
+        </inertial>
+    </link>
+
+    <joint name="laser_B4_joint" type="fixed">
+            <parent link="base_link" />
+            <child link="laser_B4_link" />
+            <origin xyz="-0.483 0.258 0.0765" rpy="0 0 2.3562"/>
+    </joint>
+
+    <link name="laser_B4_link">
+        <visual>
+          <origin xyz="0.0 0 0" rpy="0 3.1413 3.1413"/>
+          <geometry>
+              <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/visual/sick_lms1xx.dae" />
+          </geometry>
+          <material name="DarkGrey"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                  <mesh filename="package://kmriiwa_description/meshes/kmp200/sensors/collision/sick_lms1xx.stl" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.2"/>
+            <inertia ixx="0.002355" ixy="0.0" ixz="0.0" iyy="0.002355" iyz="0.0" izz="0.0002809"/>
+        </inertial>
+    </link>
+
+    <link name="front_left_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" />
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder length="0.175" radius="0.125" />
+          </geometry>
+        </collision>
+
+        <inertial>
+          <mass value="6.5" />
+          <origin xyz="0 0 0" />
+          <inertia ixx="0.04197" ixy="0.0" ixz="0.0" iyy="0.0508" iyz="0.0" izz="0.04197"/>
+        </inertial>
+    </link>
+
+    <link name="front_right_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" />
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder length="0.175" radius="0.125" />
+          </geometry>
+        </collision>
+
+        <inertial>
+          <mass value="6.5" />
+          <origin xyz="0 0 0" />
+          <inertia ixx="0.04197" ixy="0.0" ixz="0.0" iyy="0.0508" iyz="0.0" izz="0.04197"/>
+        </inertial>
+    </link>
+
+    <link name="back_left_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" />
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder length="0.175" radius="0.125" />
+          </geometry>
+        </collision>
+
+        <inertial>
+          <mass value="6.5" />
+          <origin xyz="0 0 0" />
+          <inertia ixx="0.04197" ixy="0.0" ixz="0.0" iyy="0.0508" iyz="0.0" izz="0.04197"/>
+        </inertial>
+    </link>
+
+    <link name="back_right_wheel_link">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" />
+          </geometry>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder length="0.175" radius="0.125" />
+          </geometry>
+        </collision>
+        <inertial>
+          <mass value="6.5" />
+          <origin xyz="0 0 0" />
+          <inertia ixx="0.04197" ixy="0.0" ixz="0.0" iyy="0.0508" iyz="0.0" izz="0.04197"/>
+        </inertial>
+    </link>
+
+    <joint name="front_left_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_left_wheel_link"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0.28 0.1825 0.0535"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="front_right_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_right_wheel_link"/>
+        <origin xyz="0.28 -0.1825 0.0535"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="back_left_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_left_wheel_link"/>
+        <origin xyz="-0.28 0.1825 0.0535"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+    <joint name="back_right_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="back_right_wheel_link"/>
+        <origin xyz="-0.28 -0.1825 0.0535"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="100" velocity="100"/>
+        <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+
+   </xacro:macro>
+
+</robot>
