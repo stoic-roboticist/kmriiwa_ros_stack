@@ -12,7 +12,7 @@
   
   <!--iiwa-->
   <xacro:arg name="hardware_interface" default="PositionJointInterface"/>
-  <xacro:arg name="robot_name" default="iiwa14"/>
+  <xacro:arg name="robot_name" default="kmriiwa_iiwa"/>
   <xacro:arg name="origin_xyz" default="0.363 -0.184 0.0"/>
   <xacro:arg name="origin_rpy" default="0 0 -1.5708"/>
   

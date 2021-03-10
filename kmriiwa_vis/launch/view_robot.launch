@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Launcher to visualize the real robot in rviz-->
+  <include file="$(find kmriiwa_bringup)/launch/kmriiwa_bringup.launch"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmriiwa_vis)/rviz/robot.rviz"/>
+  
+</launch>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
+    <param name="destination_frame" value="base_link"/>
+    <param name="cloud_destination_topic" value="/merged_cloud"/>
+    <param name="scan_destination_topic" value="/scan_multi"/>
+    <param name="laserscan_topics" value ="/kmriiwa/base/state/LaserB1Scan /kmriiwa/base/state/LaserB4Scan" />
+
+    <param name="angle_min" value="$(eval (-135* 3.1415) / 180)"/>
+    <param name="angle_max" value="(eval (135* 3.1415) / 180)"/>
+    <param name="angle_increment" value="(eval (0.5* 3.1415) / 180)"/>
+    <param name="scan_time" value="0.5"/>
+    <param name="range_min" value="0.12"/>
+    <param name="range_max" value="15.0"/>
+</node>
+
+</launch>
