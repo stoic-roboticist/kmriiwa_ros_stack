@@ -1,2 +1,2 @@
-# CMake
-CMakeLists.txt
+# ignore vi swp files
+*.swp
