@@ -1,0 +1,15 @@
+<launch>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find kmriiwa_navigation)/maps/dryLab.yaml" />
+
+  <include file="$(find amcl)/examples/amcl_omni.launch" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find kmriiwa_navigation)/config/common_costmap.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find kmriiwa_navigation)/config/common_costmap.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find kmriiwa_navigation)/config/global_costmap.yaml" command="load" />
+    <rosparam file="$(find kmriiwa_navigation)/config/local_costmap.yaml" command="load" /> 
+    <rosparam file="$(find kmriiwa_navigation)/config/local_planner.yaml" command="load" />
+ </node>
+
+</launch> 
