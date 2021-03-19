@@ -1,0 +1,16 @@
+sudo: required
+dist: focal
+language: generic
+
+services:
+  - docker
+
+env:
+  - ROS_DISTRO=noetic
+
+install:
+  - docker pull ros:${ROS_DISTRO}-robot > /dev/null
+
+script:
+  - echo "Testing kmriiwa_stack on {ROS_DISTRO}"
+  - docker run -v $(pwd):/root/noteic_ws/src -it ros:${ROS_DISTRO}-robot /bin/bash -c "cd /root/noteic_ws/src && source .travis/ci.sh"
