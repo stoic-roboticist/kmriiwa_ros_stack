@@ -1,2 +1,4 @@
 # ignore vi swp files
 *.swp
+iiwa_description
+
