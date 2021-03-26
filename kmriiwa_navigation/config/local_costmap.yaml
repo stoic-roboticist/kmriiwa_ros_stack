@@ -1,4 +1,6 @@
 local_costmap:
-  global_frame: odom
+  global_frame: map
   static_map: false
   rolling_window: true
+  width: 5
+  height: 5

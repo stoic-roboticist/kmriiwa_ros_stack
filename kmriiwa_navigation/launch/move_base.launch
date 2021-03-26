@@ -1,8 +1,10 @@
 <launch>
 
+  <arg name="local_planner" default="teb_planner" />
+
   <node name="map_server" pkg="map_server" type="map_server" args="$(find kmriiwa_navigation)/maps/dryLab.yaml" />
 
-  <include file="$(find amcl)/examples/amcl_omni.launch" />
+  <include file="$(find kmriiwa_navigation)/launch/amcl.launch" />
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find kmriiwa_navigation)/config/common_costmap.yaml" command="load" ns="global_costmap" />
@@ -10,6 +12,13 @@
     <rosparam file="$(find kmriiwa_navigation)/config/global_costmap.yaml" command="load" />
     <rosparam file="$(find kmriiwa_navigation)/config/local_costmap.yaml" command="load" /> 
     <rosparam file="$(find kmriiwa_navigation)/config/local_planner.yaml" command="load" />
+    
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" if="$(eval local_planner == 'teb_planner')" />
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" if="$(eval local_planner == 'base_planner')"/> 
+    
+    <remap from="cmd_vel" to="kmriiwa/base/command/cmd_vel" />
  </node>
+
+ <include file="$(find kmriiwa_vis)/launch/navigation_view.launch" />
 
 </launch> 
