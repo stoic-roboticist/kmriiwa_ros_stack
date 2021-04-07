@@ -19,6 +19,8 @@ endif()
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
+  gazebo_plugins
+  gazebo_ros_control
   roscpp
 )
 
@@ -114,7 +116,10 @@ find_package(gazebo REQUIRED)
 catkin_package(
    DEPENDS
      roscpp
-     gazebo_ros     
+     gazebo_ros
+     gazebo_plugins
+     hector_gazebo
+     gazebo_ros_control    
 )
 
 ###########

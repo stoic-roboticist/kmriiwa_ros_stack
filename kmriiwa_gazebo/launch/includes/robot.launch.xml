@@ -2,15 +2,29 @@
   Spawns the robot inside a Gazebo simulation
   -->
 <launch>
-  <arg name="robot_name" value="kmriiwa"/>
-  <param name="robot_description"
-        command="$(find xacro)/xacro '$(find kmriiwa_description)/urdf/kmriiwa.urdf.xacro'"/>
+  <arg name="robot_name" default="kmriiwa"/>
+  <arg name="hardware_interface" default="PositionJointInterface"/>
+  <arg name="init_pose_x" default="0.0"/>
+  <arg name="init_pose_y" default="0.0"/>
+  <arg name="init_pose_z" default="0.0"/>
+  <arg name="init_pose_yew" default="0.0"/>
+  
+  <!-- upload the robot description -->
+  <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
+    <arg name="robot_name" value="$(arg robot_name)" />
+    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+  </include>
+  
+  <!-- spawn the robot -->
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)"
-        args="-x 0.0 -y 0.0 -z 1.5 -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
+        args="-x $(arg init_pose_x) 
+              -y $(arg init_pose_y) 
+              -z $(arg init_pose_z) 
+              -Y $(arg init_pose_yew)
+              -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
   </node>
+  
 
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-    <param name="publish_frequency" type="double" value="30.0"/>
-  </node>
+  <!-- utilize nodelets for efficiency -->
   <node pkg="nodelet" type="nodelet" name="$(arg robot_name)_nodelet_manager" args="manager"/>
 </launch>

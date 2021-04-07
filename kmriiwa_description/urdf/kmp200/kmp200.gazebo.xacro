@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="kmp200_gazebo" params="robot_name">
+
+    <!-- Gazebo planar move plugin -->
+    <!-- <gazebo>
+        <plugin name='planar_move' filename='libgazebo_ros_planar_move.so'>
+            <robotNamespace>/${robot_name}</robotNamespace>
+            <commandTopic>base/command/cmd_vel</commandTopic>
+            <odometryTopic>base/state/odom</odometryTopic>
+            <update_rate>100</update_rate>
+            <publish_rate>10</publish_rate>
+
+            
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <odometryRate>20.0</odometryRate>
+
+            <covariance_x>0.0001</covariance_x>
+            <covariance_y>0.0001</covariance_y>
+            <covariance_yaw>0.01</covariance_yaw>
+        </plugin>
+    </gazebo>  -->
+
+    <!-- Hector ros force based planar move plugin -->
+    <gazebo>
+        <plugin name='ros_force_based_move' filename='libgazebo_ros_force_based_move.so'>
+            <robotNamespace>/${robot_name}</robotNamespace>
+            <commandTopic>base/command/cmd_vel</commandTopic>
+            <odometryTopic>base/state/odom</odometryTopic>
+
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+
+            <publishOdometryTf>true</publishOdometryTf>
+            <odometryFrame>odom</odometryFrame>
+            <odometryRate>20.0</odometryRate>
+
+            <yaw_velocity_p_gain>1000</yaw_velocity_p_gain> 
+            <x_velocity_p_gain>20000</x_velocity_p_gain> 
+            <y_velocity_p_gain>20000</y_velocity_p_gain> 
+
+        </plugin>
+    </gazebo> 
+
+    <gazebo reference="laser_B1_link">
+        <sensor name="sensor_B1" type="ray">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                    <samples>640</samples>
+                    <resolution>1.000000</resolution>
+                    <min_angle>-2.30383</min_angle>
+                    <max_angle>2.30383</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.12</min>
+                    <max>15</max>
+                    <resolution>0.0100</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_sensor_B1_controller" filename="libgazebo_ros_laser.so">
+                <topicName>/${robot_name}/base/state/LaserB1Scan</topicName>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frameName>laser_B1_link</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="laser_B4_link">
+        <sensor name="sensor_B4" type="ray">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                    <samples>640</samples>
+                    <resolution>1.000000</resolution>
+                    <min_angle>-2.30383</min_angle>
+                    <max_angle>2.30383</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.12</min>
+                    <max>15</max>
+                    <resolution>0.0100</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_sensor_B4_controller" filename="libgazebo_ros_laser.so">
+                <topicName>/${robot_name}/base/state/LaserB4Scan</topicName>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frameName>laser_B4_link</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+    <gazebo reference="front_left_wheel_link">
+        <surface>
+            <contact>
+                <collide_without_contact>true</collide_without_contact>
+            </contact>
+        </surface>
+    </gazebo>
+
+    <gazebo reference="front_right_wheel_link">
+        <surface>
+            <contact>
+                <collide_without_contact>true</collide_without_contact>
+            </contact>
+        </surface>
+    </gazebo>
+
+    <gazebo reference="back_left_wheel_link">
+        <surface>
+            <contact>
+                <collide_without_contact>true</collide_without_contact>
+            </contact>
+        </surface>
+    </gazebo>
+
+    <gazebo reference="back_right_wheel_link">
+        <surface>
+            <contact>
+                <collide_without_contact>true</collide_without_contact>
+            </contact>
+        </surface>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

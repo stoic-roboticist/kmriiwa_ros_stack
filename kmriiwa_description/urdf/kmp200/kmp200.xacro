@@ -1,13 +1,31 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="kmp200">
+
+  <!-- Import Gazebo-settings -->
+  <xacro:include filename="$(find kmriiwa_description)/urdf/kmp200/kmp200.gazebo.xacro" />
+
+  <!-- some technical data constants obtained from KMP200 manual-->
+  <xacro:property name="base_length" value="1.08" />
+  <xacro:property name="base_height" value="0.7" />
+  <xacro:property name="base_width" value="0.63" />
+  <xacro:property name="base_mass" value="390" />
+  <xacro:property name="center_of_gravity_height_noload" value="0.16" /> <!-- actual center at 0.26. Changed it to prevent robot rolling over in gazebo with ros_force_based_move plugin-->
+  <xacro:property name="wheel_radius" value="0.125" />
+  <xacro:property name="wheel_thickness" value="0.132" />
+  <xacro:property name="track_gauge" value="0.365" />
+  <xacro:property name="wheel_base" value="0.56" />
+
+  <xacro:property name="ground_clearance" value="0.025" /> <!-- distance from wheel-floor contact point to base bottom side-->
+
+  <xacro:macro name="kmp200" params="robot_name">
+    
     <link name="base_footprint"/>
 
     <joint name="footprint_to_base_link" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
-        <origin rpy="0 0 0.0" xyz="0 0 0.033"/>
+        <origin rpy="0 0 0.0" xyz="0 0 ${ground_clearance}"/>
     </joint>
 
 
@@ -21,15 +39,21 @@
         </visual>
         <collision>
           <geometry>
-            <box size="1.12 0.63 0.7"/>
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/KMP200.dae"/>
           </geometry>
         </collision>
+        <inertial>
+            <origin xyz="0 0 ${center_of_gravity_height_noload-ground_clearance}" rpy="0 0 0"/>
+            <mass value="${base_mass}"/>
+            <!-- obtained from KMP200 model on fusion 360 with some modification-->
+            <inertia ixx="28.95" ixy="-0.187" ixz="1.242" iyy="44.03" iyz="-0.1441" izz="33.83"/>
+        </inertial>
     </link>
     
     <joint name="base_link_to_top" type="fixed">
         <parent link="base_link"/>
         <child link="base_top_link"/>
-        <origin rpy="0 0 0.0" xyz="0 0 0.6672"/>
+        <origin rpy="0 0 0.0" xyz="0 0 ${base_height-ground_clearance}"/>
     </joint>
     
     <link name="base_top_link"/>
@@ -88,69 +112,73 @@
 
     <link name="front_left_wheel_link">
         <visual>
-          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" scale="1.06695 1.06695 1.06695"/>
           </geometry>
         </visual>
         <collision>
           <origin xyz="0 0 0" rpy="1.57 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
           </geometry>
         </collision>
     </link>
 
     <link name="front_right_wheel_link">
         <visual>
-          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" scale="1.06695 1.06695 1.06695"/>
           </geometry>
         </visual>
         <collision>
           <origin xyz="0 0 0" rpy="1.57 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
           </geometry>
         </collision>
     </link>
 
     <link name="back_left_wheel_link">
         <visual>
-          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" scale="1.06695 1.06695 1.06695"/>
           </geometry>
         </visual>
         <collision>
           <origin xyz="0 0 0" rpy="1.57 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
           </geometry>
         </collision>
     </link>
 
     <link name="back_right_wheel_link">
         <visual>
-          <origin xyz="0 0 0" rpy="1.57 0 0" />
+          <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <mesh filename="package://kmriiwa_description/meshes/kmp200/wheels/omni_wheel_1.dae" scale="1.06695 1.06695 1.06695"/>
           </geometry>
         </visual>
         <collision>
           <origin xyz="0 0 0" rpy="1.57 0 0" />
           <geometry>
-            <cylinder length="0.132" radius="0.125" />
+            <cylinder length="${wheel_thickness}" radius="${wheel_radius}" />
           </geometry>
         </collision>
+        <!-- <inertial>
+            <mass value="14"/>
+            <inertia ixx="0.075016" ixy="0.0" ixz="0.0" iyy="0.075016" iyz="0.0" izz="0.109375"/>
+        </inertial> -->
     </link>
 
     <joint name="front_left_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="front_left_wheel_link"/>
         <axis xyz="0 1 0"/>
-        <origin xyz="0.28 0.182 0.092"/>
+        <origin xyz="${wheel_base/2} ${track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
     </joint>
@@ -158,7 +186,7 @@
     <joint name="front_right_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="front_right_wheel_link"/>
-        <origin xyz="0.28 -0.182 0.092"/>
+        <origin xyz="${wheel_base/2} ${-1*track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
@@ -167,7 +195,7 @@
     <joint name="back_left_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="back_left_wheel_link"/>
-        <origin xyz="-0.28 0.182 0.092"/>
+        <origin xyz="${-1*wheel_base/2} ${track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
@@ -176,11 +204,14 @@
     <joint name="back_right_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="back_right_wheel_link"/>
-        <origin xyz="-0.28 -0.182 0.092"/>
+        <origin xyz="${-1*wheel_base/2} ${-1*track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
     </joint>
+
+    <!--Extensions -->
+    <xacro:kmp200_gazebo robot_name="${robot_name}"/>
 
    </xacro:macro>
 
