@@ -1,0 +1,7 @@
+Header header
+sensor_msgs/BatteryState battery_state
+bool motion_enabled
+bool warning_field_clear
+bool safety_field_clear
+bool emergency_state_enabled
+

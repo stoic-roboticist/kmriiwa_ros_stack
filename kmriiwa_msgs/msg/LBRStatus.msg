@@ -1,0 +1,6 @@
+Header header
+bool motion_enabled
+bool axes_mastered
+bool axes_gms_referenced
+bool axes_position_referenced
+bool emergency_state_enabled
