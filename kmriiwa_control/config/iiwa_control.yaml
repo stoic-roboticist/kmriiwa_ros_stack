@@ -5,7 +5,7 @@
     publish_rate: 50  
     
   # Forward Position Controllers ---------------------------------------
-  PositionJointInterface_trajectory_controller:
+  manipulator_controller:
     type: position_controllers/JointTrajectoryController
     joints: 
       - kmriiwa_joint_1
