@@ -1,9 +1,7 @@
-local_costmap:
+global_costmap:
   global_frame: odom
-  static_map: false
   rolling_window: true
-  width: 5
-  height: 5
+  static_map: false
 
   plugins:
   - {name: obstacles,       type: "costmap_2d::ObstacleLayer"}

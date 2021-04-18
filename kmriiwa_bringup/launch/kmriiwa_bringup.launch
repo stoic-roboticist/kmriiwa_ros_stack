@@ -1,14 +1,13 @@
-<?xml version="1.0"?>
 <launch>
 
-
-  <arg name="merge_laser_scans" default="true"/>
+  <arg name="robot_name" default="kmriiwa"/>
+  <arg name="merge_laser_scans" default="false"/>
   
   <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch"/>
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
   	<param name="publish_frequency" value="10"/>
-  	<remap from="joint_states" to="kmriiwa/arm/joint_states"/>
+  	<remap from="joint_states" to="$(arg robot_name)/arm/joint_states"/>
   </node>
 
   <group if="$(arg merge_laser_scans)">

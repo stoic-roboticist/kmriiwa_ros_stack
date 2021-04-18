@@ -1,0 +1,33 @@
+<launch>
+
+  <arg name="rviz" default="true"/>
+  <arg name="no_static_map" default="false"/>
+  <arg name="map_file" default="$(find kmriiwa_navigation)/maps/test_zone.yaml" />
+  <arg name="base_global_planner" default="navfn/NavfnROS"/>
+  <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
+  
+  <!-- bringup base navigattion stack -->
+  <include file="$(find kmriiwa_navigation)/launch/map_navigation.launch" unless="$(arg no_static_map)">
+    <arg name="base_global_planner" value="$(arg base_global_planner)"/>
+    <arg name="base_local_planner" value="$(arg base_local_planner)" />
+    <arg name="map_file" value="$(arg map_file)" />
+  </include>
+
+  <include file="$(find kmriiwa_navigation)/launch/mapless_navigation.launch" if="$(arg no_static_map)">
+    <arg name="base_global_planner" value="$(arg base_global_planner)"/>
+    <arg name="base_local_planner" value="$(arg base_local_planner)" />
+  </include>
+  
+  <!-- bringup arm manipulation stack -->
+  <include file="$(find kmriiwa_moveit)/launch/move_group.launch">
+    <arg name="pipeline" value="ompl" />
+  </include>
+
+  <!-- rviz view -->
+  <include file="$(find kmriiwa_vis)/launch/navigation_moveit_view.launch" if="$(arg rviz)">
+    <arg name="no_static_map" value="$(arg no_static_map)" />
+ </include>
+
+  
+  
+</launch>

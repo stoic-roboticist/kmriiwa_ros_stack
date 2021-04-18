@@ -56,9 +56,9 @@
   </include>
 
   <!-- Sensors Functionality -->
-  <!-- <include ns="move_group" file="$(find kmriiwa_moveit)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
+  <include ns="move_group" file="$(find kmriiwa_moveit)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_sensor_manager" value="kmriiwa" />
-  </include> -->
+  </include>
 
   <!-- Start the actual move_group node/action server -->
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="joint_states:=/kmriiwa/arm/joint_states $(arg command_args)">

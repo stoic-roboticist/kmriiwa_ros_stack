@@ -40,9 +40,9 @@
             <odometryFrame>odom</odometryFrame>
             <odometryRate>20.0</odometryRate>
 
-            <yaw_velocity_p_gain>1000</yaw_velocity_p_gain> 
-            <x_velocity_p_gain>20000</x_velocity_p_gain> 
-            <y_velocity_p_gain>20000</y_velocity_p_gain> 
+            <yaw_velocity_p_gain>500</yaw_velocity_p_gain> 
+            <x_velocity_p_gain>1000</x_velocity_p_gain> 
+            <y_velocity_p_gain>1000</y_velocity_p_gain> 
 
         </plugin>
     </gazebo> 
@@ -118,6 +118,8 @@
     </gazebo>
 
     <gazebo reference="front_left_wheel_link">
+        <mu1 value="0.0"/>
+        <mu2 value="0.0"/>
         <surface>
             <contact>
                 <collide_without_contact>true</collide_without_contact>
@@ -126,6 +128,8 @@
     </gazebo>
 
     <gazebo reference="front_right_wheel_link">
+        <mu1 value="0.0"/>
+        <mu2 value="0.0"/>
         <surface>
             <contact>
                 <collide_without_contact>true</collide_without_contact>
@@ -134,6 +138,8 @@
     </gazebo>
 
     <gazebo reference="back_left_wheel_link">
+        <mu1 value="0.0"/>
+        <mu2 value="0.0"/>
         <surface>
             <contact>
                 <collide_without_contact>true</collide_without_contact>
@@ -142,6 +148,8 @@
     </gazebo>
 
     <gazebo reference="back_right_wheel_link">
+        <mu1 value="0.0"/>
+        <mu2 value="0.0"/>
         <surface>
             <contact>
                 <collide_without_contact>true</collide_without_contact>

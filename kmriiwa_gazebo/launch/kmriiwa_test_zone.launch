@@ -1,0 +1,47 @@
+<!-- Launch Kmriiwa Gazebo simulation in an empty world -->
+<launch>
+
+  <arg name="robot_name" default="kmriiwa" />
+  <arg name="hardware_interface" default="PositionJointInterface"/>
+  <arg name="controllers" default="joint_state_controller manipulator_controller"/>
+  <arg name="init_pose_x" default="1.5"/>
+  <arg name="init_pose_y" default="0.0"/>
+  <arg name="init_pose_z" default="0.0"/>
+  <arg name="init_pose_yew" default="0.0"/>
+
+  <arg name="use_sim_time" default="true"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false" />
+  <arg name="paused" default="true" />
+  <arg name="headless" default="false" />
+
+  <!-- start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find kmriiwa_gazebo)/worlds/test_zone.world"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="headless" value="$(arg headless)" />
+  </include>
+  
+  <!-- spawn the robot -->
+  <include file="$(find kmriiwa_gazebo)/launch/includes/robot.launch.xml">
+    <arg name="robot_name" value="$(arg robot_name)" />
+    <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+    <arg name="init_pose_x" value="$(arg init_pose_x)"/>
+    <arg name="init_pose_y" value="$(arg init_pose_y)"/>
+    <arg name="init_pose_z" value="$(arg init_pose_z)"/>
+    <arg name="init_pose_yew" value="$(arg init_pose_yew)"/>
+  </include>
+
+  <!-- spawn the controllers -->
+  <group ns="$(arg robot_name)/arm">
+    <include file="$(find kmriiwa_control)/launch/kmriiwa_control.launch">
+      <arg name="robot_name" value="$(arg robot_name)" />
+      <arg name="controllers" value="$(arg controllers)"/>
+    </include>
+  </group>
+
+
+</launch>

@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmriiwa_vis)/rviz/navigation.rviz"/>
+  <arg name="no_static_map" default="false" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmriiwa_vis)/rviz/map_navigation.rviz" unless="$(arg no_static_map)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kmriiwa_vis)/rviz/mapless_navigation.rviz" if="$(arg no_static_map)"/>
+
 </launch>

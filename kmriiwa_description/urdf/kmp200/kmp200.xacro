@@ -10,7 +10,7 @@
   <xacro:property name="base_height" value="0.7" />
   <xacro:property name="base_width" value="0.63" />
   <xacro:property name="base_mass" value="390" />
-  <xacro:property name="center_of_gravity_height_noload" value="0.16" /> <!-- actual center at 0.26. Changed it to prevent robot rolling over in gazebo with ros_force_based_move plugin-->
+  <xacro:property name="center_of_gravity_height_noload" value="0.26" />
   <xacro:property name="wheel_radius" value="0.125" />
   <xacro:property name="wheel_thickness" value="0.132" />
   <xacro:property name="track_gauge" value="0.365" />
@@ -45,8 +45,8 @@
         <inertial>
             <origin xyz="0 0 ${center_of_gravity_height_noload-ground_clearance}" rpy="0 0 0"/>
             <mass value="${base_mass}"/>
-            <!-- obtained from KMP200 model on fusion 360 with some modification-->
-            <inertia ixx="28.95" ixy="-0.187" ixz="1.242" iyy="44.03" iyz="-0.1441" izz="33.83"/>
+            <!-- obtained from KMP200 model on fusion 360 with some modification to align center of mass with the given one-->
+            <inertia ixx="28.95" ixy="0.0" ixz="0.0" iyy="44.03" iyz="0.0" izz="33.83"/>
         </inertial>
     </link>
     

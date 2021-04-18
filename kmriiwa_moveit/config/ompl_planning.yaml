@@ -157,7 +157,7 @@ manipulator:
   projection_evaluator: joints(kmriiwa_joint_1,kmriiwa_joint_2)
   longest_valid_segment_fraction: 0.005
 endeffector:
-  default_planner_config: None
+  default_planner_config: ""
   planner_configs:
     - AnytimePathShortening
     - SBL

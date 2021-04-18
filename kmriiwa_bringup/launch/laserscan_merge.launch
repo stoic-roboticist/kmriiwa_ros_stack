@@ -1,11 +1,15 @@
-<?xml version="1.0"?>
-
 <launch>
-  <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
-    <param name="destination_frame" value="base_link"/>
-    <param name="cloud_destination_topic" value="/merged_cloud"/>
-    <param name="scan_destination_topic" value="/scan_multi"/>
-    <param name="laserscan_topics" value ="/kmriiwa/base/state/LaserB1Scan /kmriiwa/base/state/LaserB4Scan" />
+
+  <arg name="laserscan_topics" default="/kmriiwa/base/state/LaserB1Scan /kmriiwa/base/state/LaserB4Scan" />
+  <arg name="cloud_destination_topic" default="/merged_cloud"/>
+  <arg name="scan_destination_topic" default="/scan_multi"/>
+  <arg name="destination_frame" default="base_link"/>
+
+  <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" respawn="true" respawn_delay="10" output="screen">
+    <param name="destination_frame" value="$(arg destination_frame)"/>
+    <param name="cloud_destination_topic" value="$(arg cloud_destination_topic)"/>
+    <param name="scan_destination_topic" value="$(arg scan_destination_topic)"/>
+    <param name="laserscan_topics" value ="$(arg laserscan_topics)" />
 
     <param name="angle_min" value="$(eval (-135* 3.1415) / 180)"/>
     <param name="angle_max" value="(eval (135* 3.1415) / 180)"/>
