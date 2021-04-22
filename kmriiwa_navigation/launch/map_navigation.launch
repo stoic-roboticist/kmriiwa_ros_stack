@@ -1,7 +1,7 @@
 <launch>
 
   <!-- <arg name="map_file" default="$(find kmriiwa_navigation)/maps/dryLab.yaml" /> -->
-  <arg name="map_file" default="$(find kmriiwa_navigation)/maps/test_zone.yaml" />
+  <arg name="map_file" default="$(find kmriiwa_navigation)/maps/dryLab.yaml" />
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
   <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
   <arg name="rviz" default="false"/>

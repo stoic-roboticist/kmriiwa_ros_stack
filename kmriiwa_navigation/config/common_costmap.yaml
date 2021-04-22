@@ -21,4 +21,4 @@ obstacles:
   laser_scan_sensor: {sensor_frame: base_link, data_type: LaserScan, topic: scan_multi, marking: true, clearing: true}
 
 inflation:
-  inflation_radius: 0.75
+  inflation_radius: 0.5
