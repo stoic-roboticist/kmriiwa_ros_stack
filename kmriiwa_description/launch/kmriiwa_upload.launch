@@ -4,6 +4,6 @@
   <arg name="robot_name" default="kmriiwa" />
   <arg name="hardware_interface" default="PositionJointInterface" />
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find kmriiwa_description)/urdf/kmriiwa.urdf.xacro' robot_name:='$(arg robot_name)' hardware_interface:='$(arg hardware_interface)'"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find kmriiwa_description)/urdf/robot/kmriiwa.urdf.xacro' robot_name:='$(arg robot_name)' hardware_interface:='$(arg hardware_interface)'"/>
 
 </launch>

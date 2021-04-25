@@ -51,6 +51,7 @@
     <disable_collisions link1="back_left_wheel_link" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="back_left_wheel_link" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="back_left_wheel_link" link2="laser_B4_link" reason="Default"/>
+    <disable_collisions link1="back_left_wheel_link" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="back_right_wheel_link" link2="base_link" reason="Adjacent"/>
     <disable_collisions link1="back_right_wheel_link" link2="front_left_wheel_link" reason="Never"/>
     <disable_collisions link1="back_right_wheel_link" link2="front_right_wheel_link" reason="Never"/>
@@ -64,14 +65,17 @@
     <disable_collisions link1="back_right_wheel_link" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="back_right_wheel_link" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="back_right_wheel_link" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="back_right_wheel_link" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="base_link" link2="front_left_wheel_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="front_right_wheel_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="kmriiwa_link_0" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="kmriiwa_link_0" reason="Never"/>
     <disable_collisions link1="base_link" link2="kmriiwa_link_1" reason="Never"/>
     <disable_collisions link1="base_link" link2="kmriiwa_link_2" reason="Never"/>
     <disable_collisions link1="base_link" link2="kmriiwa_link_3" reason="Never"/>
+    <disable_collisions link1="base_link" link2="kmriiwa_link_4" reason="Never"/>
     <disable_collisions link1="base_link" link2="laser_B1_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="laser_B4_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="riser_flange_link" reason="Adjacent"/>
     <disable_collisions link1="front_left_wheel_link" link2="front_right_wheel_link" reason="Never"/>
     <disable_collisions link1="front_left_wheel_link" link2="kmriiwa_link_0" reason="Never"/>
     <disable_collisions link1="front_left_wheel_link" link2="kmriiwa_link_1" reason="Never"/>
@@ -83,6 +87,7 @@
     <disable_collisions link1="front_left_wheel_link" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="front_left_wheel_link" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="front_left_wheel_link" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="front_left_wheel_link" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="front_right_wheel_link" link2="kmriiwa_link_0" reason="Never"/>
     <disable_collisions link1="front_right_wheel_link" link2="kmriiwa_link_1" reason="Never"/>
     <disable_collisions link1="front_right_wheel_link" link2="kmriiwa_link_2" reason="Never"/>
@@ -93,12 +98,14 @@
     <disable_collisions link1="front_right_wheel_link" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="front_right_wheel_link" link2="laser_B1_link" reason="Default"/>
     <disable_collisions link1="front_right_wheel_link" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="front_right_wheel_link" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_0" link2="kmriiwa_link_1" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_0" link2="kmriiwa_link_2" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_0" link2="kmriiwa_link_3" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_0" link2="kmriiwa_link_4" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_0" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_0" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="kmriiwa_link_0" link2="riser_flange_link" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_1" link2="kmriiwa_link_2" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_1" link2="kmriiwa_link_3" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_1" link2="kmriiwa_link_4" reason="Never"/>
@@ -107,6 +114,7 @@
     <disable_collisions link1="kmriiwa_link_1" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_1" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_1" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="kmriiwa_link_1" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_2" link2="kmriiwa_link_3" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_2" link2="kmriiwa_link_4" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_2" link2="kmriiwa_link_5" reason="Never"/>
@@ -114,17 +122,20 @@
     <disable_collisions link1="kmriiwa_link_2" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_2" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_2" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="kmriiwa_link_2" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_3" link2="kmriiwa_link_4" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_3" link2="kmriiwa_link_5" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_3" link2="kmriiwa_link_6" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_3" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_3" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_3" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="kmriiwa_link_3" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_4" link2="kmriiwa_link_5" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_4" link2="kmriiwa_link_6" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_4" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_4" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_4" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="kmriiwa_link_4" link2="riser_flange_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_5" link2="kmriiwa_link_6" reason="Adjacent"/>
     <disable_collisions link1="kmriiwa_link_5" link2="kmriiwa_link_7" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_5" link2="laser_B1_link" reason="Never"/>
@@ -135,4 +146,6 @@
     <disable_collisions link1="kmriiwa_link_7" link2="laser_B1_link" reason="Never"/>
     <disable_collisions link1="kmriiwa_link_7" link2="laser_B4_link" reason="Never"/>
     <disable_collisions link1="laser_B1_link" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="laser_B1_link" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="laser_B4_link" link2="riser_flange_link" reason="Never"/>
 </robot>

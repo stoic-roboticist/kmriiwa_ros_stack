@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="kmriiwa" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find kmriiwa_description)/urdf/iiwa14/materials.xacro" />
+  <!--Import the lbr iiwa macro -->
+  <xacro:include filename="$(find kmriiwa_description)/urdf/iiwa14/iiwa14.xacro"/>
+  <!--Import the kmp200 macro -->
+  <xacro:include filename="$(find kmriiwa_description)/urdf/kmp200/kmp200.xacro"/>
+
+  <xacro:property name="arm_base_flange_x_pos" value="0.363" />
+  <xacro:property name="arm_base_flange_y_pos" value="-0.184" />
+  <xacro:property name="arm_base_flange_z_pos" value="-0.01" />
+  <xacro:property name="arm_base_flange_yew" value="-1.5708" />
+  <xacro:property name="riser_flange_height" value="0.26" />
+  <xacro:property name="riser_flange_radius" value="0.121" />
+  <xacro:property name="flange_origin_xyz" value="${arm_base_flange_x_pos} ${arm_base_flange_y_pos} ${arm_base_flange_z_pos+riser_flange_height/2}"/>
+  <xacro:property name="flange_origin_rpy" value="0 0 ${arm_base_flange_yew}"/>
+
+  <xacro:arg name="robot_name" default="kmriiwa"/>
+  <xacro:arg name="hardware_interface" default="PositionJointInterface"/>
+
+  <!--kmp200-->
+  <xacro:kmp200 robot_name="$(arg robot_name)"/>
+
+   <!--riser flange-->
+  <joint name="base_top_riser_flange_joint" type="fixed">
+        <parent link="base_top_link"/>
+        <child link="riser_flange_link"/>
+        <origin xyz="${flange_origin_xyz}" rpy="${flange_origin_rpy}"/>
+  </joint>
+
+  <link name="riser_flange_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="${riser_flange_height}" radius="${riser_flange_radius}" />
+        </geometry>
+        <material name="White"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <cylinder length="${riser_flange_height}" radius="${riser_flange_radius}" />
+        </geometry>
+      </collision>
+  </link>
+  
+
+  <!--iiwa-->
+  <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="riser_flange_link">
+    <origin xyz="0 0 ${riser_flange_height/2}" rpy="0 0 0" />
+  </xacro:iiwa14>
+  
+</robot>

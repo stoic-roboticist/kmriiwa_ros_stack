@@ -35,7 +35,7 @@
           <geometry>
             <mesh filename="package://kmriiwa_description/meshes/kmp200/KMP200.dae"/>
           </geometry>
-          <material name="Grey"/>
+          <material name="White"/>
         </visual>
         <collision>
           <geometry>

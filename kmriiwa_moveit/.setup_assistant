@@ -1,11 +1,11 @@
 moveit_setup_assistant_config:
   URDF:
     package: kmriiwa_description
-    relative_path: urdf/kmriiwa.urdf.xacro
+    relative_path: urdf/robot/kmriiwa.urdf.xacro
     xacro_args: ""
   SRDF:
     relative_path: config/kmriiwa.srdf
   CONFIG:
     author_name: Hatem Fakhruldeen
     author_email: hatem.fakhruldeen@gmail.com
-    generated_timestamp: 1618585536
+    generated_timestamp: 1619342852
