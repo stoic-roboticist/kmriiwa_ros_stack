@@ -14,8 +14,9 @@
   <arg name="verbose" default="false" />
   <arg name="paused" default="true" />
   <arg name="headless" default="false" />
+  <env name="GAZEBO_MODEL_PATH" value="$(optenv GAZEBO_MODEL_PATH):$(find kmriiwa_gazebo)/worlds/models" />
 
-  <!-- start Gazebo with an empty world -->
+  <!-- start Gazebo with test zone world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find kmriiwa_gazebo)/worlds/test_zone.world"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
@@ -37,7 +38,7 @@
 
   <!-- spawn the controllers -->
   <group ns="$(arg robot_name)/arm">
-    <include file="$(find kmriiwa_control)/launch/kmriiwa_control.launch">
+    <include file="$(find kmriiwa_gazebo)/launch/includes/kmriiwa_gazebo_control.launch">
       <arg name="robot_name" value="$(arg robot_name)" />
       <arg name="controllers" value="$(arg controllers)"/>
     </include>

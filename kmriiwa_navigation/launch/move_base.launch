@@ -7,7 +7,7 @@
   <!-- <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS" /> -->
 
   <!-- launch the laser scan merger to contactate laser scanners messages into a single message -->
-  <include file="$(find kmriiwa_bringup)/launch/laserscan_merge.launch">
+  <include file="$(find kmriiwa_navigation)/launch/laserscan_merge.launch">
     <arg name="laserscan_topics" value="/kmriiwa/base/state/LaserB1Scan /kmriiwa/base/state/LaserB4Scan" />
     <arg name="cloud_destination_topic" value="/merged_cloud"/>
     <arg name="scan_destination_topic" value="/scan_multi"/>

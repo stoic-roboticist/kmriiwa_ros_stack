@@ -1,8 +1,4 @@
 repositories:
-  iiwa_stack:
-    type: git
-    url: https://github.com/IFL-CAMP/iiwa_stack.git
-    version: master
   ira_laser_tools:
     type: git
     url: https://github.com/iralabdisco/ira_laser_tools.git

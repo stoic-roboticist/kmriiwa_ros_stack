@@ -3,13 +3,11 @@
   <name>kmriiwa_bringup</name>
   <version>0.0.0</version>
   <description>The kmriiwa_bringup package</description>
-  <author email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</author>
-  <maintainer email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</maintainer>
+  <author email="hatem.fakhruldeen@gmail.com">stoic-roboticist</author>
+  <maintainer email="hatem.fakhruldeen@gmail.com">stoic-roboticist</maintainer>
   
   <license>TODO</license>
   
   <buildtool_depend>catkin</buildtool_depend>
-  <exec_depend>ira_laser_tools</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>kmriiwa_description</exec_depend>
 </package>

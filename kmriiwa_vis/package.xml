@@ -3,8 +3,8 @@
   <name>kmriiwa_vis</name>
   <version>0.0.0</version>
   <description>The kmriiwa_vis package</description>
-  <author email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</author>
-  <maintainer email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</maintainer>
+  <author email="hatem.fakhruldeen@gmail.com">stoic-roboticist</author>
+  <maintainer email="hatem.fakhruldeen@gmail.com">stoic-roboticist</maintainer>
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>

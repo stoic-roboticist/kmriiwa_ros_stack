@@ -1,7 +1,6 @@
 <launch>
 
   <arg name="robot_name" default="kmriiwa"/>
-  <arg name="merge_laser_scans" default="false"/>
   
   <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch"/>
   
@@ -10,8 +9,4 @@
   	<remap from="joint_states" to="$(arg robot_name)/arm/joint_states"/>
   </node>
 
-  <group if="$(arg merge_laser_scans)">
-    <include file="$(find kmriiwa_bringup)/launch/laserscan_merge.launch"/>
-  </group>
-  
 </launch>

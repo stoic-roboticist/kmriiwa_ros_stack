@@ -8,7 +8,7 @@
     <arg name="robot_state_frequency" default="20" />
     
     <!-- Loads joint controller configurations from YAML file to parameter server -->
-    <rosparam file="$(find kmriiwa_control)/config/iiwa_control.yaml" command="load" />
+    <rosparam file="$(find kmriiwa_gazebo)/config/gazebo_iiwa_control.yaml" command="load" />
     <param name="/$(arg robot_name)/joint_state_controller/publish_rate" value="$(arg joint_state_frequency)" />
     
     <!-- Loads the controllers -->

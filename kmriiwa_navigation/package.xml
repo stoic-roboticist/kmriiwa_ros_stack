@@ -3,8 +3,8 @@
   <name>kmriiwa_navigation</name>
   <version>0.0.0</version>
   <description>The kmriiwa_navigation package</description>
-  <author email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</author>
-  <maintainer email="hatem.fakhruldeen@gmail.com">Hatem Fakhruldeen</maintainer>
+  <author email="hatem.fakhruldeen@gmail.com">stoic-roboticist</author>
+  <maintainer email="hatem.fakhruldeen@gmail.com">stoic-roboticist</maintainer>
   
   <license>TODO</license>
 
@@ -19,5 +19,6 @@
   <exec_depend>base_local_planner</exec_depend>
   <exec_depend>teb_local_planner</exec_depend>
   <exec_depend>navfn</exec_depend>
+  <exec_depend>ira_laser_tools</exec_depend>
 
 </package>

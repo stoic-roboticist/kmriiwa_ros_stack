@@ -28,7 +28,7 @@
 
   <!-- spawn the controllers -->
   <group ns="$(arg robot_name)/arm">
-    <include file="$(find kmriiwa_control)/launch/kmriiwa_control.launch">
+    <include file="$(find kmriiwa_gazebo)/launch/includes/kmriiwa_gazebo_control.launch">
       <arg name="robot_name" value="$(arg robot_name)" />
       <arg name="controllers" value="$(arg controllers)"/>
     </include>
