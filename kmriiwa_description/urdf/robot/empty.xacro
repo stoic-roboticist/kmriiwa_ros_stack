@@ -1,0 +1,5 @@
+<robot>
+  <!-- This file is a placeholder which is included by default from
+       kmriiwa.urdf.xacro. If a robot is being customized and requires
+       additional URDF, add them here. -->
+</robot>

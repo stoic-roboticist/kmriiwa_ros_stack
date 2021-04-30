@@ -18,6 +18,7 @@
 
   <xacro:arg name="robot_name" default="kmriiwa"/>
   <xacro:arg name="hardware_interface" default="PositionJointInterface"/>
+  <xacro:arg name="robot_extras" default="$(find kmriiwa_description)/urdf/robot/empty.xacro" />
 
   <!--kmp200-->
   <xacro:kmp200 robot_name="$(arg robot_name)"/>
@@ -50,5 +51,8 @@
   <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="riser_flange_link">
     <origin xyz="0 0 ${riser_flange_height/2}" rpy="0 0 0" />
   </xacro:iiwa14>
-  
+
+  <!-- Optional custom includes such as grippers, sensors, etc... -->
+  <xacro:include filename="$(arg robot_extras)"/>
+
 </robot>
