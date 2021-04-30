@@ -14,7 +14,7 @@
   <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
     <arg name="robot_name" value="$(arg robot_name)" />
     <arg name="hardware_interface" value="$(arg hardware_interface)"/>
-    <arg name="robot_extras" value="$(find kmriiwa_description)/urdf/robot/empty.xacro"/>
+    <arg name="robot_extras" value="$(arg robot_extras)"/>
   </include>
   
   <!-- spawn the robot -->
