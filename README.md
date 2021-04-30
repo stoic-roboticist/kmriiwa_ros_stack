@@ -28,6 +28,20 @@ This package allows to simulate the robot in Gazebo. It exposes the same interfa
 ### kmriiwa_vis
 This package contain different rviz configs to visualise the robot in different contexts.
 
+## Installation
+To install this package, all its dependencies can be retrieved using rosdep except [ira_laser_tools](https://github.com/iralabdisco/ira_laser_tools) that needs to be added to your workspace. As a result, to successfully build this package follow these steps:
+1. Navigate to the `src` directory of your ROS workspace (e.g. `cd ~/ros_ws/src`)
+2. Clone [ira_laser_tools](https://github.com/iralabdisco/ira_laser_tools):
+```
+git clone https://github.com/iralabdisco/ira_laser_tools
+```
+3. Run `cd ~/ros_ws`
+4. Run rosdep install command:
+```
+rosdep install --from-paths src --ignore-src -r -y
+```
+5. Run `catkin_make` (or `catkin_make_isolated` if you use isolated builds)
+
 ## Usage
 
 **To run this package, [kmriiwa_ros_java driver](https://github.com/stoic-roboticist/kmriiwa_ros_java) needs to be installed on the robot controller. Refer to that package README.md for setup and usage instructions.**

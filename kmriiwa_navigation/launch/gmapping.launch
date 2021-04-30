@@ -2,6 +2,14 @@
 <launch>
 
   <arg name="scan_topic" default="scan_multi" />
+  
+  <!-- launch the laser scan merger to contactate laser scanners messages into a single message -->
+  <include file="$(find kmriiwa_navigation)/launch/laserscan_merge.launch">
+    <arg name="laserscan_topics" value="/kmriiwa/base/state/LaserB1Scan /kmriiwa/base/state/LaserB4Scan" />
+    <arg name="cloud_destination_topic" value="/merged_cloud"/>
+    <arg name="scan_destination_topic" value="/scan_multi"/>
+    <arg name="destination_frame" value="base_link"/>
+  </include>
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping">
     <rosparam>

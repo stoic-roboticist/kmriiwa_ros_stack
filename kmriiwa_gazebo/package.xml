@@ -19,6 +19,8 @@
   <build_export_depend>rospy</build_export_depend>
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>gazebo_ros_control</exec_depend>
+  <build_depend>ros_control</build_depend>
+  <build_depend>ros_controllers</build_depend>
   <exec_depend>gazebo_plugins</exec_depend>
   <exec_depend>hector_gazebo</exec_depend>
   <exec_depend>roscpp</exec_depend>
