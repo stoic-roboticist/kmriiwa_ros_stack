@@ -6,7 +6,7 @@
   
   <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
     <arg name="robot_name" value="$(arg robot_name)" />
-    <agr name="robot_extras" value="$(arg robot_extras)"/>
+    <arg name="robot_extras" value="$(arg robot_extras)"/>
   </include>
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
