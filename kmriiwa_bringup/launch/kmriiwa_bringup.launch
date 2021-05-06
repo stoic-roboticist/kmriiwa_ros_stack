@@ -1,17 +1,19 @@
 <launch>
-
   <arg name="robot_name" default="kmriiwa"/>
   <arg name="robot_extras" default="$(find kmriiwa_description)/urdf/robot/empty.xacro"/>
   <arg name="publish_frequency" default="10"/>
   
-  <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
-    <arg name="robot_name" value="$(arg robot_name)" />
-    <arg name="robot_extras" value="$(arg robot_extras)"/>
-  </include>
-  
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-  	<param name="publish_frequency" value="$(arg publish_frequency)"/>
-  	<remap from="joint_states" to="$(arg robot_name)/arm/joint_states"/>
-  </node>
+  <group ns="$(arg robot_name)">
+    
+    <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
+      <arg name="robot_name" value="$(arg robot_name)" />
+      <arg name="robot_extras" value="$(arg robot_extras)"/>
+    </include>
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+      <param name="publish_frequency" value="$(arg publish_frequency)"/>
+      <remap from="joint_states" to="arm/joint_states"/>
+    </node>
+  </group>
 
 </launch>

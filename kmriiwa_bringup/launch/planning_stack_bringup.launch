@@ -1,5 +1,6 @@
 <launch>
 
+  <arg name="robot_name" default="kmriiwa" />
   <arg name="rviz" default="true"/>
   <arg name="no_static_map" default="false"/>
   <arg name="map_file" default="$(find kmriiwa_navigation)/maps/dryLab.yaml" />
@@ -19,9 +20,12 @@
   </include>
   
   <!-- bringup arm manipulation stack -->
-  <include file="$(find kmriiwa_moveit)/launch/move_group.launch">
-    <arg name="pipeline" value="ompl" />
-  </include>
+  <group ns="$(arg robot_name)">
+    <include file="$(find kmriiwa_moveit)/launch/move_group.launch">
+      <arg name="pipeline" value="ompl" />
+      <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+  </group>
 
   <!-- rviz view -->
   <include file="$(find kmriiwa_vis)/launch/navigation_moveit_view.launch" if="$(arg rviz)">
