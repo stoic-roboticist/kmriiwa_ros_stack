@@ -3,15 +3,19 @@
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
   <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
   <arg name="rviz" default="false"/>
+  <arg name="robot_ns" default="kmriiwa" />
   
   <include file="$(find kmriiwa_navigation)/launch/move_base.launch" >
     <arg name="no_static_map" value="true" />
     <arg name="base_global_planner" value="$(arg base_global_planner)"/>
     <arg name="base_local_planner" value="$(arg base_local_planner)" />
+    <arg name="robot_ns" value="$(arg robot_ns)" />
   </include>
 
- <include file="$(find kmriiwa_vis)/launch/navigation_view.launch" if="$(arg rviz)">
-  <arg name="no_static_map" value="true" />
- </include>
+  <group ns="$(arg robot_ns)">
+    <include file="$(find kmriiwa_vis)/launch/navigation_view.launch" if="$(arg rviz)">
+      <arg name="no_static_map" value="true" />
+    </include>
+  </group>
 
 </launch> 

@@ -5,19 +5,23 @@
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
   <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
   <arg name="rviz" default="false"/>
-  
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <arg name="robot_ns" default="kmriiwa" />
 
-  <include file="$(find kmriiwa_navigation)/launch/amcl.launch" />
+  <group ns="$(arg robot_ns)">
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <include file="$(find kmriiwa_navigation)/launch/amcl.launch" />
+
+    <include file="$(find kmriiwa_vis)/launch/navigation_view.launch" if="$(arg rviz)">
+      <arg name="no_static_map" value="false" />
+    </include>
+  </group>
 
   <include file="$(find kmriiwa_navigation)/launch/move_base.launch" >
+    <arg name="robot_ns" value="$(arg robot_ns)" />
     <arg name="no_static_map" value="false" />
     <arg name="base_global_planner" value="$(arg base_global_planner)"/>
     <arg name="base_local_planner" value="$(arg base_local_planner)" />
-  </include>
-
-  <include file="$(find kmriiwa_vis)/launch/navigation_view.launch" if="$(arg rviz)">
-    <arg name="no_static_map" value="false" />
   </include>
 
 </launch> 
