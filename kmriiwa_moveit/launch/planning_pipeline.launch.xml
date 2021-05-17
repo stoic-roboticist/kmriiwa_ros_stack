@@ -4,7 +4,10 @@
        It is assumed that all planning pipelines are named XXX_planning_pipeline.launch  -->
 
   <arg name="pipeline" default="ompl" />
+  <arg name="robot_name" default="kmriiwa" />
 
-  <include file="$(find kmriiwa_moveit)/launch/$(arg pipeline)_planning_pipeline.launch.xml" />
+  <include file="$(find kmriiwa_moveit)/launch/$(arg pipeline)_planning_pipeline.launch.xml">
+  	<arg name="robot_name" default="$(arg robot_name)" />
+  </include>
 
 </launch>

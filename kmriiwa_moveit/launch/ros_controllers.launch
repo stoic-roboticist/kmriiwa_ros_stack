@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <launch>
 
+  <arg name="robot_name" default="kmriiwa" />
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find kmriiwa_moveit)/config/ros_controllers.yaml" command="load"/>
+  <rosparam file="$(find kmriiwa_moveit)/config/ros_controllers.yaml" command="load" subst_value="true">$(arg robot_name)</rosparam>
 
   <!-- Load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
