@@ -1,7 +1,7 @@
 footprint: [[0.506, 0.315], [0.506, -0.315], [-0.506, -0.315], [-0.506, 0.315]]
 footprint_padding: 0.1
 
-robot_base_frame: base_link
+robot_base_frame: $(arg robot_name)_base_link
 update_frequency: 5.0
 publish_frequency: 5.0
 transform_tolerance: 0.5
@@ -18,7 +18,7 @@ static:
 
 obstacles:
   observation_sources: laser_scan_sensor
-  laser_scan_sensor: {sensor_frame: base_link, data_type: LaserScan, topic: scan_multi, marking: true, clearing: true}
+  laser_scan_sensor: {sensor_frame: $(arg robot_name)_base_link, data_type: LaserScan, topic: scan_multi, marking: true, clearing: true}
 
-inflation:
+inflation_layer:
   inflation_radius: 0.5

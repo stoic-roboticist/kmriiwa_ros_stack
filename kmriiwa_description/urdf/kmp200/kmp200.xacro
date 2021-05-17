@@ -20,16 +20,16 @@
 
   <xacro:macro name="kmp200" params="robot_name">
     
-    <link name="base_footprint"/>
+    <link name="${robot_name}_base_footprint"/>
 
-    <joint name="footprint_to_base_link" type="fixed">
-        <parent link="base_footprint"/>
-        <child link="base_link"/>
+    <joint name="${robot_name}_footprint_to_base_link" type="fixed">
+        <parent link="${robot_name}_base_footprint"/>
+        <child link="${robot_name}_base_link"/>
         <origin rpy="0 0 0.0" xyz="0 0 ${ground_clearance}"/>
     </joint>
 
 
-    <link name="base_link">
+    <link name="${robot_name}_base_link">
     	<origin rpy="0 0 0" xyz="0 0 0"/>
         <visual>
           <geometry>
@@ -50,21 +50,21 @@
         </inertial>
     </link>
     
-    <joint name="base_link_to_top" type="fixed">
-        <parent link="base_link"/>
-        <child link="base_top_link"/>
+    <joint name="${robot_name}_base_link_to_top" type="fixed">
+        <parent link="${robot_name}_base_link"/>
+        <child link="${robot_name}_base_top_link"/>
         <origin rpy="0 0 0.0" xyz="0 0 ${base_height-ground_clearance}"/>
     </joint>
     
-    <link name="base_top_link"/>
+    <link name="${robot_name}_base_top_link"/>
 
-    <joint name="laser_B1_joint" type="fixed">
-            <parent link="base_link" />
-            <child link="laser_B1_link" />
+    <joint name="${robot_name}_laser_B1_joint" type="fixed">
+            <parent link="${robot_name}_base_link" />
+            <child link="${robot_name}_laser_B1_link" />
             <origin xyz="0.464 -0.256 0.1168" rpy="0 0 -0.7854"/>
     </joint>
 
-    <link name="laser_B1_link">
+    <link name="${robot_name}_laser_B1_link">
         <visual>
           <origin xyz="0 0 0" rpy="3.1413 0 0"/>
           <geometry>
@@ -84,13 +84,13 @@
         </inertial>
     </link>
 
-    <joint name="laser_B4_joint" type="fixed">
-            <parent link="base_link" />
-            <child link="laser_B4_link" />
+    <joint name="${robot_name}_laser_B4_joint" type="fixed">
+            <parent link="${robot_name}_base_link" />
+            <child link="${robot_name}_laser_B4_link" />
             <origin xyz="-0.464 0.256 0.1168" rpy="0 0 2.3562"/>
     </joint>
 
-    <link name="laser_B4_link">
+    <link name="${robot_name}_laser_B4_link">
         <visual>
           <origin xyz="0.0 0 0" rpy="0 3.1413 3.1413"/>
           <geometry>
@@ -110,7 +110,7 @@
         </inertial>
     </link>
 
-    <link name="front_left_wheel_link">
+    <link name="${robot_name}_front_left_wheel_link">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
@@ -125,7 +125,7 @@
         </collision>
     </link>
 
-    <link name="front_right_wheel_link">
+    <link name="${robot_name}_front_right_wheel_link">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
@@ -140,7 +140,7 @@
         </collision>
     </link>
 
-    <link name="back_left_wheel_link">
+    <link name="${robot_name}_back_left_wheel_link">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
@@ -155,7 +155,7 @@
         </collision>
     </link>
 
-    <link name="back_right_wheel_link">
+    <link name="${robot_name}_back_right_wheel_link">
         <visual>
           <origin xyz="0 0 0" rpy="0 0 0" />
           <geometry>
@@ -174,36 +174,36 @@
         </inertial> -->
     </link>
 
-    <joint name="front_left_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="front_left_wheel_link"/>
+    <joint name="${robot_name}_front_left_wheel_joint" type="fixed">
+        <parent link="${robot_name}_base_link"/>
+        <child link="${robot_name}_front_left_wheel_link"/>
         <axis xyz="0 1 0"/>
         <origin xyz="${wheel_base/2} ${track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
-    <joint name="front_right_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="front_right_wheel_link"/>
+    <joint name="${robot_name}_front_right_wheel_joint" type="fixed">
+        <parent link="${robot_name}_base_link"/>
+        <child link="${robot_name}_front_right_wheel_link"/>
         <origin xyz="${wheel_base/2} ${-1*track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
-    <joint name="back_left_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="back_left_wheel_link"/>
+    <joint name="${robot_name}_back_left_wheel_joint" type="fixed">
+        <parent link="${robot_name}_base_link"/>
+        <child link="${robot_name}_back_left_wheel_link"/>
         <origin xyz="${-1*wheel_base/2} ${track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>
         <joint_properties damping="0.0" friction="0.0"/>
     </joint>
 
-    <joint name="back_right_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="back_right_wheel_link"/>
+    <joint name="${robot_name}_back_right_wheel_joint" type="fixed">
+        <parent link="${robot_name}_base_link"/>
+        <child link="${robot_name}_back_right_wheel_link"/>
         <origin xyz="${-1*wheel_base/2} ${-1*track_gauge/2} ${wheel_radius-ground_clearance}"/>
         <axis xyz="0 1 0"/>
         <limit effort="100" velocity="100"/>

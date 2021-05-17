@@ -1,5 +1,5 @@
 global_costmap:
-  global_frame: odom
+  global_frame: $(arg robot_name)_odom
   rolling_window: true
   static_map: false
 

@@ -24,13 +24,13 @@
   <xacro:kmp200 robot_name="$(arg robot_name)"/>
 
    <!--riser flange-->
-  <joint name="base_top_riser_flange_joint" type="fixed">
-        <parent link="base_top_link"/>
-        <child link="riser_flange_link"/>
+  <joint name="$(arg robot_name)_base_top_riser_flange_joint" type="fixed">
+        <parent link="$(arg robot_name)_base_top_link"/>
+        <child link="$(arg robot_name)_riser_flange_link"/>
         <origin xyz="${flange_origin_xyz}" rpy="${flange_origin_rpy}"/>
   </joint>
 
-  <link name="riser_flange_link">
+  <link name="$(arg robot_name)_riser_flange_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -48,7 +48,7 @@
   
 
   <!--iiwa-->
-  <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="riser_flange_link">
+  <xacro:iiwa14 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="$(arg robot_name)_riser_flange_link">
     <origin xyz="0 0 ${riser_flange_height/2}" rpy="0 0 0" />
   </xacro:iiwa14>
 

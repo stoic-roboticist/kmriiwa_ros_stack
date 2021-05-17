@@ -1,10 +1,13 @@
 <launch>
 
-    <node pkg="amcl" type="amcl" name="amcl">
+  <arg name="robot_name" default="kmriiwa" />
+
+  <node pkg="amcl" type="amcl" name="amcl">
     <!-- Publish scans from best pose at a max of 10 Hz -->
     <param name="use_map_topic" value="true" />
     <remap from="scan" to="scan_multi" />
-    <param name="odom_frame_id" value="odom" />
+    <param name="odom_frame_id" value="$(arg robot_name)_odom" />
+    <param name="base_frame_id" value="$(arg robot_name)_base_link" />
 
     <param name="odom_model_type" value="omni"/>
     <param name="odom_alpha5" value="0.1"/>

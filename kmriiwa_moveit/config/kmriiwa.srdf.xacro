@@ -5,6 +5,7 @@
 -->
 <robot name="kmriiwa" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:arg name="robot_name" default="kmriiwa"/>
+    <xacro:arg name="no_virtual_joint" default="true"/>
     <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
     <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
@@ -35,118 +36,120 @@
         <joint name="$(arg robot_name)_joint_6" value="0.8827"/>
         <joint name="$(arg robot_name)_joint_7" value="0.662003"/>
     </group_state>
-    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
-    <virtual_joint name="$(arg robot_name)_base_footprint_map_virtual_joint" type="planar" parent_frame="map" child_link="base_footprint"/>
+    <xacro:unless value="$(arg no_virtual_joint)">
+        <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+        <virtual_joint name="$(arg robot_name)_base_footprint_map_virtual_joint" type="planar" parent_frame="map" child_link="$(arg robot_name)_base_footprint"/>
+    </xacro:unless>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="back_left_wheel_link" link2="back_right_wheel_link" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="base_link" reason="Adjacent"/>
-    <disable_collisions link1="back_left_wheel_link" link2="front_left_wheel_link" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="front_right_wheel_link" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="back_left_wheel_link" link2="laser_B4_link" reason="Default"/>
-    <disable_collisions link1="back_left_wheel_link" link2="riser_flange_link" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="base_link" reason="Adjacent"/>
-    <disable_collisions link1="back_right_wheel_link" link2="front_left_wheel_link" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="front_right_wheel_link" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="back_right_wheel_link" link2="riser_flange_link" reason="Never"/>
-    <disable_collisions link1="base_link" link2="front_left_wheel_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="front_right_wheel_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="$(arg robot_name)_link_0" reason="Never"/>
-    <disable_collisions link1="base_link" link2="$(arg robot_name)_link_1" reason="Never"/>
-    <disable_collisions link1="base_link" link2="$(arg robot_name)_link_2" reason="Never"/>
-    <disable_collisions link1="base_link" link2="$(arg robot_name)_link_3" reason="Never"/>
-    <disable_collisions link1="base_link" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="base_link" link2="laser_B1_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="laser_B4_link" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="riser_flange_link" reason="Adjacent"/>
-    <disable_collisions link1="front_left_wheel_link" link2="front_right_wheel_link" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="front_left_wheel_link" link2="riser_flange_link" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="laser_B1_link" reason="Default"/>
-    <disable_collisions link1="front_right_wheel_link" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="front_right_wheel_link" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_back_right_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_base_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_front_left_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_front_right_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_laser_B4_link" reason="Default"/>
+    <disable_collisions link1="$(arg robot_name)_back_left_wheel_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_base_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_front_left_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_front_right_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_back_right_wheel_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_front_left_wheel_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_front_right_wheel_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_link_0" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_link_1" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_link_2" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_link_3" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_link_4" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_laser_B1_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_laser_B4_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_base_link" link2="$(arg robot_name)_riser_flange_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_front_right_wheel_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_left_wheel_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_0" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_1" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_2" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_3" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_4" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_5" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_6" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_link_7" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_laser_B1_link" reason="Default"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_front_right_wheel_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_link_1" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_link_2" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_link_3" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_link_4" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_0" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_0" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_0" link2="riser_flange_link" reason="Adjacent"/>
+    <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_0" link2="$(arg robot_name)_riser_flange_link" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_2" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_3" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_4" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_5" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_6" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_1" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_1" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_1" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_1" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_link_3" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_link_4" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_link_5" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_link_6" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_2" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_2" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_2" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_2" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_link_4" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_link_5" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_link_6" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_3" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_3" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_3" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_3" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_link_5" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_link_6" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_4" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_4" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_4" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_4" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_5" link2="$(arg robot_name)_link_6" reason="Adjacent"/>
     <disable_collisions link1="$(arg robot_name)_link_5" link2="$(arg robot_name)_link_7" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_5" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_5" link2="laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_5" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_5" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
     <disable_collisions link1="$(arg robot_name)_link_6" link2="$(arg robot_name)_link_7" reason="Adjacent"/>
-    <disable_collisions link1="$(arg robot_name)_link_6" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_6" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_7" link2="laser_B1_link" reason="Never"/>
-    <disable_collisions link1="$(arg robot_name)_link_7" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="laser_B1_link" link2="laser_B4_link" reason="Never"/>
-    <disable_collisions link1="laser_B1_link" link2="riser_flange_link" reason="Never"/>
-    <disable_collisions link1="laser_B4_link" link2="riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_6" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_6" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_7" link2="$(arg robot_name)_laser_B1_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_link_7" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_laser_B1_link" link2="$(arg robot_name)_laser_B4_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_laser_B1_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
+    <disable_collisions link1="$(arg robot_name)_laser_B4_link" link2="$(arg robot_name)_riser_flange_link" reason="Never"/>
 </robot>

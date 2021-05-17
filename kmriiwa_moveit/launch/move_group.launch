@@ -2,6 +2,7 @@
   
   <arg name="namespace" default="kmriiwa" />
   <arg name="robot_name" default="kmriiwa" />
+  <arg name="no_virtual_joint" default="true"/>
   <!-- GDB Debug Option -->
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
@@ -46,6 +47,7 @@
     <include file="$(find kmriiwa_moveit)/launch/planning_context.launch">
       <arg name="load_robot_description" value="$(arg load_robot_description)" />
       <arg name="robot_name" value="$(arg robot_name)"/>
+      <arg name="no_virtual_joint" value="$(arg no_virtual_joint)"/>
     </include>
 
     <!-- Planning Functionality -->
