@@ -5,6 +5,7 @@
   <arg name="robot_name" default="kmriiwa"/>
   <arg name="hardware_interface" default="PositionJointInterface"/>
   <arg name="robot_extras" default="$(find kmriiwa_description)/urdf/robot/empty.xacro"/>
+  <arg name="robot_state_frequency" default="20" />
   <arg name="init_pose_x" default="0.0"/>
   <arg name="init_pose_y" default="0.0"/>
   <arg name="init_pose_z" default="0.0"/>
@@ -23,10 +24,18 @@
               -y $(arg init_pose_y) 
               -z $(arg init_pose_z) 
               -Y $(arg init_pose_yew)
-              -unpause -urdf -param robot_description -model $(arg robot_name)" respawn="false">
+              -unpause -urdf -param '/$(arg robot_name)/robot_description' -model $(arg robot_name)" respawn="false">
   </node>
-  
 
-  <!-- utilize nodelets for efficiency -->
+  <!-- Converts joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+      <remap from="joint_states" to="/$(arg robot_name)/arm/joint_states" />
+      <param name="publish_frequency" value="$(arg robot_state_frequency)" />
+  </node>
+
+    <!-- utilize nodelets for efficiency -->
   <node pkg="nodelet" type="nodelet" name="$(arg robot_name)_nodelet_manager" args="manager"/>
+
+  
 </launch>

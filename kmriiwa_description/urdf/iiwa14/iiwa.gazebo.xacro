@@ -22,6 +22,7 @@
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
         <robotNamespace>/${robot_name}/arm</robotNamespace>
+        <robotParam>/${robot_name}/robot_description</robotParam>
       </plugin>
     </gazebo>
 

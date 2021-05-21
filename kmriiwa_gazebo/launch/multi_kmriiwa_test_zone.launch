@@ -1,13 +1,8 @@
 <!-- Launch Kmriiwa Gazebo simulation in an empty world -->
 <launch>
 
-  <arg name="robot_name" default="kmriiwa" />
   <arg name="hardware_interface" default="PositionJointInterface"/>
   <arg name="controllers" default="joint_state_controller manipulator_controller"/>
-  <arg name="init_pose_x" default="1.5"/>
-  <arg name="init_pose_y" default="0.0"/>
-  <arg name="init_pose_z" default="0.0"/>
-  <arg name="init_pose_yew" default="0.0"/>
 
   <arg name="use_sim_time" default="true"/>
   <arg name="debug" default="false"/>
@@ -26,21 +21,42 @@
     <arg name="headless" value="$(arg headless)" />
   </include>
   
-  <!-- spawn the robot -->
-  <group ns="$(arg robot_name)">
+  <!-- spawn the first robot -->
+  <group ns="kuka1">
     <include file="$(find kmriiwa_gazebo)/launch/includes/robot.launch.xml">
-      <arg name="robot_name" value="$(arg robot_name)" />
+      <arg name="robot_name" value="kuka1" />
       <arg name="hardware_interface" value="$(arg hardware_interface)"/>
-      <arg name="init_pose_x" value="$(arg init_pose_x)"/>
-      <arg name="init_pose_y" value="$(arg init_pose_y)"/>
-      <arg name="init_pose_z" value="$(arg init_pose_z)"/>
-      <arg name="init_pose_yew" value="$(arg init_pose_yew)"/>
+      <arg name="init_pose_x" value="1.5"/>
+      <arg name="init_pose_y" value="0.0"/>
+      <arg name="init_pose_z" value="0.0"/>
+      <arg name="init_pose_yew" value="0.0"/>
     </include>
 
     <!-- spawn the controllers -->
     <group ns="arm">
       <include file="$(find kmriiwa_gazebo)/launch/includes/kmriiwa_gazebo_control.launch">
-        <arg name="robot_name" value="$(arg robot_name)" />
+        <arg name="robot_name" value="kuka1" />
+        <arg name="controllers" value="$(arg controllers)"/>
+        <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+      </include>
+    </group>
+  </group>
+
+  <!-- spawn the second robot -->
+  <group ns="kuka2">
+    <include file="$(find kmriiwa_gazebo)/launch/includes/robot.launch.xml">
+      <arg name="robot_name" value="kuka2" />
+      <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+      <arg name="init_pose_x" value="3.5"/>
+      <arg name="init_pose_y" value="5.0"/>
+      <arg name="init_pose_z" value="0.0"/>
+      <arg name="init_pose_yew" value="1.57"/>
+    </include>
+
+    <!-- spawn the controllers -->
+    <group ns="arm">
+      <include file="$(find kmriiwa_gazebo)/launch/includes/kmriiwa_gazebo_control.launch">
+        <arg name="robot_name" value="kuka2" />
         <arg name="controllers" value="$(arg controllers)"/>
         <arg name="hardware_interface" value="$(arg hardware_interface)"/>
       </include>

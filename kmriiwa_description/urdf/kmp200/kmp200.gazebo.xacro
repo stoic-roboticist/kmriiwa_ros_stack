@@ -34,10 +34,10 @@
             <commandTopic>base/command/cmd_vel</commandTopic>
             <odometryTopic>base/state/odom</odometryTopic>
 
-            <robotBaseFrame>base_footprint</robotBaseFrame>
+            <robotBaseFrame>${robot_name}_base_footprint</robotBaseFrame>
 
             <publishOdometryTf>true</publishOdometryTf>
-            <odometryFrame>odom</odometryFrame>
+            <odometryFrame>${robot_name}_odom</odometryFrame>
             <odometryRate>20.0</odometryRate>
 
             <yaw_velocity_p_gain>500</yaw_velocity_p_gain> 
@@ -47,7 +47,7 @@
         </plugin>
     </gazebo> 
 
-    <gazebo reference="laser_B1_link">
+    <gazebo reference="${robot_name}_laser_B1_link">
         <sensor name="sensor_B1" type="ray">
             <always_on>true</always_on>
             <visualize>true</visualize>
@@ -73,14 +73,15 @@
                 </noise>
             </ray>
             <plugin name="gazebo_sensor_B1_controller" filename="libgazebo_ros_laser.so">
+                <robotNamespace>/</robotNamespace>
                 <topicName>/${robot_name}/base/state/LaserB1Scan</topicName>
                 <output_type>sensor_msgs/LaserScan</output_type>
-                <frameName>laser_B1_link</frameName>
+                <frameName>${robot_name}_laser_B1_link</frameName>
             </plugin>
         </sensor>
     </gazebo>
 
-    <gazebo reference="laser_B4_link">
+    <gazebo reference="${robot_name}_laser_B4_link">
         <sensor name="sensor_B4" type="ray">
             <always_on>true</always_on>
             <visualize>true</visualize>
@@ -106,18 +107,19 @@
                 </noise>
             </ray>
             <plugin name="gazebo_sensor_B4_controller" filename="libgazebo_ros_laser.so">
+                <robotNamespace>/</robotNamespace>
                 <topicName>/${robot_name}/base/state/LaserB4Scan</topicName>
                 <output_type>sensor_msgs/LaserScan</output_type>
-                <frameName>laser_B4_link</frameName>
+                <frameName>${robot_name}_laser_B4_link</frameName>
             </plugin>
         </sensor>
     </gazebo>
 
-    <gazebo reference="base_link">
+    <gazebo reference="${robot_name}_base_link">
         <material>Gazebo/Grey</material>
     </gazebo>
 
-    <gazebo reference="front_left_wheel_link">
+    <gazebo reference="${robot_name}_front_left_wheel_link">
         <mu1 value="0.0"/>
         <mu2 value="0.0"/>
         <surface>
@@ -127,7 +129,7 @@
         </surface>
     </gazebo>
 
-    <gazebo reference="front_right_wheel_link">
+    <gazebo reference="${robot_name}_front_right_wheel_link">
         <mu1 value="0.0"/>
         <mu2 value="0.0"/>
         <surface>
@@ -137,7 +139,7 @@
         </surface>
     </gazebo>
 
-    <gazebo reference="back_left_wheel_link">
+    <gazebo reference="${robot_name}_back_left_wheel_link">
         <mu1 value="0.0"/>
         <mu2 value="0.0"/>
         <surface>
@@ -147,7 +149,7 @@
         </surface>
     </gazebo>
 
-    <gazebo reference="back_right_wheel_link">
+    <gazebo reference="${robot_name}_back_right_wheel_link">
         <mu1 value="0.0"/>
         <mu2 value="0.0"/>
         <surface>

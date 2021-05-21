@@ -4,24 +4,24 @@
     <!-- Launches the controllers according to the hardware interface selected -->
     <arg name="robot_name" default="kmriiwa" />
     <arg name="controllers" default="joint_state_controller manipulator_controller"/>
+    <arg name="hardware_interface" default="PositionJointInterface"/>
+    <arg name="robot_extras" default="$(find kmriiwa_description)/urdf/robot/empty.xacro"/>
     <arg name="joint_state_frequency" default="20" />
-    <arg name="robot_state_frequency" default="20" />
     
     <!-- Loads joint controller configurations from YAML file to parameter server -->
-    <rosparam file="$(find kmriiwa_gazebo)/config/gazebo_iiwa_control.yaml" command="load" />
+    <rosparam file="$(find kmriiwa_gazebo)/config/gazebo_iiwa_control.yaml" command="load" subst_value="true">$(arg robot_name)</rosparam>
     <param name="/$(arg robot_name)/joint_state_controller/publish_rate" value="$(arg joint_state_frequency)" />
+
+    <!-- Load robot description in the controller namespace -->
+    <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
+      <arg name="robot_name" value="$(arg robot_name)" />
+      <arg name="hardware_interface" value="$(arg hardware_interface)"/>
+      <arg name="robot_extras" value="$(arg robot_extras)"/>
+    </include>
     
     <!-- Loads the controllers -->
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
           output="screen" args="$(arg controllers)" >
-        <remap from="joint_states" to="state/joint_states" />
-    </node>
-    
-    <!-- Converts joint states to TF transforms for rviz, etc -->
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-          respawn="false" output="screen">
-        <remap from="joint_states" to="/$(arg robot_name)/arm/joint_states" />
-        <param name="publish_frequency" value="$(arg robot_state_frequency)" />
     </node>
     
 </launch>

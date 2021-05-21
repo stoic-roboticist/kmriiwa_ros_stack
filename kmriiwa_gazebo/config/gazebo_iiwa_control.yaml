@@ -8,13 +8,13 @@
   manipulator_controller:
     type: position_controllers/JointTrajectoryController
     joints: 
-      - kmriiwa_joint_1
-      - kmriiwa_joint_2
-      - kmriiwa_joint_3
-      - kmriiwa_joint_4
-      - kmriiwa_joint_5
-      - kmriiwa_joint_6
-      - kmriiwa_joint_7
+      - $(arg robot_name)_joint_1
+      - $(arg robot_name)_joint_2
+      - $(arg robot_name)_joint_3
+      - $(arg robot_name)_joint_4
+      - $(arg robot_name)_joint_5
+      - $(arg robot_name)_joint_6
+      - $(arg robot_name)_joint_7
 
     constraints:
       goal_time: 0.5                   # Override default
