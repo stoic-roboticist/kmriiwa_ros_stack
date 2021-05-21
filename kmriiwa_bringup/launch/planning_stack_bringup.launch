@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="namespace" default="kmriiwa" />
+  <arg name="use_namespace" default="true" />
   <arg name="robot_name" default="kmriiwa" />
   <arg name="rviz" default="true"/>
   <arg name="no_static_map" default="false"/>
@@ -13,21 +13,21 @@
     <arg name="base_global_planner" value="$(arg base_global_planner)"/>
     <arg name="base_local_planner" value="$(arg base_local_planner)" />
     <arg name="map_file" value="$(arg map_file)" />
-    <arg name="namespace" value="$(arg namespace)" />
+    <arg name="use_namespace" value="$(arg use_namespace)" />
     <arg name="robot_name" value="$(arg robot_name)" />
   </include>
 
   <include file="$(find kmriiwa_navigation)/launch/mapless_navigation.launch" if="$(arg no_static_map)">
     <arg name="base_global_planner" value="$(arg base_global_planner)"/>
     <arg name="base_local_planner" value="$(arg base_local_planner)" />
-    <arg name="namespace" value="$(arg namespace)" />
+    <arg name="use_namespace" value="$(arg use_namespace)" />
     <arg name="robot_name" value="$(arg robot_name)" />
   </include>
   
   <!-- bringup arm manipulation stack -->
   <include file="$(find kmriiwa_moveit)/launch/move_group.launch">
     <arg name="pipeline" value="ompl" />
-    <arg name="namespace" value="$(arg namespace)" />
+    <arg name="use_namespace" value="$(arg use_namespace)" />
     <arg name="robot_name" value="$(arg robot_name)" />
     <arg name="no_virtual_joint" value="false" unless="$(arg no_static_map)"/>
     <arg name="no_virtual_joint" value="true" if="$(arg no_static_map)"/>

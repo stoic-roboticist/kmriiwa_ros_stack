@@ -1,10 +1,10 @@
 <launch>
-  <arg name="namespace" default="kmriiwa"/>
+  <arg name="use_namespace" default="true"/>
   <arg name="robot_name" default="kmriiwa"/>
   <arg name="robot_extras" default="$(find kmriiwa_description)/urdf/robot/empty.xacro"/>
   <arg name="publish_frequency" default="10"/>
   
-  <group ns="$(arg namespace)">
+  <group ns="$(eval robot_name if use_namespace == 1 else '/')">
     
     <include file="$(find kmriiwa_description)/launch/kmriiwa_upload.launch">
       <arg name="robot_name" value="$(arg robot_name)" />

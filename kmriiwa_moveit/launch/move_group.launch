@@ -1,6 +1,6 @@
 <launch>
   
-  <arg name="namespace" default="kmriiwa" />
+  <arg name="use_namespace" default="true" />
   <arg name="robot_name" default="kmriiwa" />
   <arg name="no_virtual_joint" default="true"/>
   <!-- GDB Debug Option -->
@@ -42,7 +42,7 @@
 
   <arg name="load_robot_description" default="false" />
   
-  <group ns="$(arg namespace)">
+  <group ns="$(eval robot_name if use_namespace == 1 else '/')">
     <!-- load URDF, SRDF and joint_limits configuration -->
     <include file="$(find kmriiwa_moveit)/launch/planning_context.launch">
       <arg name="load_robot_description" value="$(arg load_robot_description)" />

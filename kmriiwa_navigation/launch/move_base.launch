@@ -1,13 +1,13 @@
 <launch>
 
-  <arg name="namespace" default="kmriiwa" />
+  <arg name="use_namespace" default="true" />
   <arg name="robot_name" default="kmriiwa" />
   <arg name="no_static_map" default="false" />
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
   <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
   <!-- <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS" /> -->
 
-  <group ns="$(arg namespace)">
+  <group ns="$(eval robot_name if use_namespace == 1 else '/')">
     <!-- launch the laser scan merger to contactate laser scanners messages into a single message -->
     <include file="$(find kmriiwa_navigation)/launch/laserscan_merge.launch">
       <arg name="robot_name" value="$(arg robot_name)" />
