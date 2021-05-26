@@ -45,23 +45,43 @@ rosdep install --from-paths src --ignore-src -r -y
 ## Usage
 
 **To run this package, [kmriiwa_ros_java driver](https://github.com/stoic-roboticist/kmriiwa_ros_java) needs to be installed on the robot controller. Refer to that package README.md for setup and usage instructions.**
+
+### Multi-robot support
+The developed stack supports multi-robot applications out of the box and as a result all of its packages run inside a namespace by default. This behavior is controlled via the **use_namespace** and **robot_name** arguments accepted by all the relevent launch scripts. The used namespace is equivalent to the *robot_name* argument inside those launch scripts. If for some reason, you need to run these packages without namespace, set the argument **use_namespace** to false when starting the specific launch script (append **use_namespace:=false** to the specific roslaunch command). 
+
+**Regardless of that, always make sure the *robot_name* argument is equivlent to the parameter *robot_name* set on the driver's application ProcessData running on the controller. If those are different, nothing will work**
+
+ 
+
 ### robot bringup
 Once the [kmriiwa_ros_java driver](https://github.com/stoic-roboticist/kmriiwa_ros_java) is up and running on the robot controller. Launch the robot bringup package to upload the robot description and publish its tf information:
 ```
 roslaunch kmriiwa_bringup kmriiwa_bringup.launch
 ```
+If the *robot_name* parameter on the driver is set to another name instead of the default name (kmriiwa), then it needs to be passed to the bringup script as follows:
+```
+roslaunch kmriiwa_bringup kmriiwa_bringup.launch robot_name:=<new_robot_name>
+```
+Furthermore, if you want to disable using namespaces set *use_namespace* to false as follows:
+```
+roslaunch kmriiwa_bringup kmriiwa_bringup.launch use_namespace:=false
+```
 ### navigation and manipulation planning stack
 After that the robot is ready to be used by moveit and the navigation stack. To launch both stacks at the same time use:
 ```
-roslaunch kmriiwa_bringup planning_stack_bringup.launch rviz:=<true|false> no_static_map:=<true|false> map_file:=<path/to/map/file>
+roslaunch kmriiwa_bringup planning_stack_bringup.launch rviz:=<true|false> no_static_map:=<true|false> map_file:=<path/to/map/file> use_namespace:=<true|false> robot_name:=<new_robot_name>
 ```
 If the *rviz* argument is set to true, rviz will launch and can be used to control the robot. If the robot is to be used in a known environment, the argument *no_static_map* need to be set to false and the argument *map_file* need to be specified. Otherwise, it is not used.
+
+To run the planning stack with a different robot name as set on the driver ProcessData, set *robot_name* to be equivalent to that value. **If the names are different nothing will work**. Finally, to disable launching all the planning nodes inside *robot_name* namespace set *use_namespace* to false.
 
 ### moveit
 To use it moveit, run the command:
 ```
 roslaunch kmriiwa_moveit move_group.launch
 ```
+This also accepts *robot_name* and *use_namespace* arguments and exhibts the behaviors previously discussed.
+
 To bringup rviz with moveit settings use:
 ```
 roslaunch kmriiwa_vis moveit_view.launch
